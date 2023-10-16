@@ -1,0 +1,9 @@
+[*]
+tab_width = 2,
+
+[*.ts,*.tsx]
+tab_width = 4,
+
+
+
+

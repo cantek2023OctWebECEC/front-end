@@ -1,13 +1,22 @@
 import './App.css'
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
+import { NotFoundPage } from './pages/NotFoundPage';
+import { HomePage } from './pages/HomePage';
 
 function App() {
 
-
   return (
-    <h1 className="text-3xl font-bold underline">
-    Hello world!
-    </h1>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App

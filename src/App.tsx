@@ -6,12 +6,14 @@ import {
 } from "react-router-dom";
 import { NotFoundPage } from './pages/NotFoundPage';
 import { HomePage } from './pages/HomePage';
+import { LoginPage } from './pages/LoginPage';
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LoginPage/>}/>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

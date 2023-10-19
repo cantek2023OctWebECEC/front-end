@@ -5,6 +5,7 @@ export const useGeoLocation = () => {
 	const getCurrentLocation = () => {
 		navigator.geolocation.getCurrentPosition(
 			(position) => {
+				console.log(position);
 				setLocation(position);
 			},
 			(error) => {

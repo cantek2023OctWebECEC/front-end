@@ -1,6 +1,6 @@
 import axios from "axios";
 import { env } from "../config/env";
-export const http = axios.create({ baseURL: env.API_HOST });
+export const http = axios.create({ baseURL: env.VITE_API_HOST });
 http.interceptors.request.use(
 	function (config) {
 		// Do something before request is sent

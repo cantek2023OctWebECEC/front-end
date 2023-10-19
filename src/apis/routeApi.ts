@@ -13,9 +13,9 @@ export enum ERouteProfile {
 	WHEEL_CHAIR = "wheel-chair",
 }
 export const getRoute = (
-	profile: ERouteProfile = ERouteProfile.DRIVING_CAR,
 	from: GeoJSON.Point,
-	to: GeoJSON.Point
+	to: GeoJSON.Point,
+	profile: ERouteProfile = ERouteProfile.DRIVING_CAR
 ): Promise<AxiosResponse<OpenRouteServiceDirectionResponse>> => {
 	return http.post(`/route/search/${profile}`, {
 		from,

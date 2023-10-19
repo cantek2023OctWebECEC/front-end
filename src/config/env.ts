@@ -1,5 +1,6 @@
 import { cleanEnv, str, url } from "envalid";
+console.log(import.meta.env);
 export const env = cleanEnv(import.meta.env, {
-	NODE_ENV: str(),
-	API_HOST: url(),
+	VITE_NODE_ENV: str(),
+	VITE_API_HOST: url(),
 });

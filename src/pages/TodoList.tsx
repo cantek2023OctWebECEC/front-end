@@ -1,25 +1,18 @@
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-import TodoListNavBar from "../components/TodoListNavBar";
-//import AddTodo from '../components/AddToDo'
-//import NavBar from '../components/TodoListNavBar'
+import React, { useState } from 'react';
+import { TodoListNavBar } from "../components/TodoListNavBar";
+import {AddTodoList} from "../components/AddTodoList";
 
 export const TodoList = () => {
+	const [selectedFilter, setSelectedFilter] = useState<string>('all');
+
 	return (
-		<>
-		<div>
-			<Header></Header>
-		</div>
 		<div>
 			<main>
-				<TodoListNavBar/>
-				
+				<TodoListNavBar
+					setSelectedFilter={setSelectedFilter}
+				/>
+				<AddTodoList selectedFilter={selectedFilter} />
 			</main>
         </div>
-		<div>
-			<Footer></Footer>
-		</div>
-		</>
-
 	);
 };

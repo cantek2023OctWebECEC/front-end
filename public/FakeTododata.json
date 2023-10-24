@@ -3,32 +3,32 @@
       {
         "task": "Task 1",
         "status": "active",
-        "assignedTo": "Member 1"
+        "assignedTo": "Mary"
       },
       {
         "task": "Task 2",
         "status": "active",
-        "assignedTo": "Member 2"
+        "assignedTo": "Coco"
       },
       {
         "task": "Task 3",
         "status": "Complete",
-        "assignedTo": "Member 3"
+        "assignedTo": "Alex"
       },
       {
         "task": "Task 4",
         "status": "active",
-        "assignedTo": "Member 1"
+        "assignedTo": "Mandy"
       },
       {
         "task": "Task 5",
         "status": "Complete",
-        "assignedTo": "Member 2"
+        "assignedTo": "Kimmy"
       },
       {
         "task": "Task 6",
         "status": "active",
-        "assignedTo": "Member 3"
+        "assignedTo": "Saba"
       }
     ]
   }

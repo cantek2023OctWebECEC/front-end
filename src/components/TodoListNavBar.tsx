@@ -1,13 +1,17 @@
 import { useSearchParams, useNavigate  } from "react-router-dom"
 
+interface TodoListNavBarProps {
+    setSelectedFilter: (filter: string) => void;
+  }
 
-export const TodoListNavBar = () => {
+export const TodoListNavBar = ({ setSelectedFilter }:TodoListNavBarProps) => {
 
   const [searchParams] = useSearchParams()
   const todosData = searchParams.get("todos")
   const navigate = useNavigate();
   
   const updateFilter = (filterValue:string) => {
+    setSelectedFilter(filterValue); 
     searchParams.set("todos", filterValue);
     navigate(`?${searchParams.toString()}`, { replace: true });
   };

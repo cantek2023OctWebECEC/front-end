@@ -6,7 +6,9 @@ import { Popup } from "react-leaflet/Popup";
 import { twMerge } from "tailwind-merge";
 import "leaflet/dist/leaflet.css";
 import React from "react";
+
 export interface ITravelMapProps extends React.HTMLProps<HTMLDivElement> {}
+
 export const TravelMap = (props: ITravelMapProps) => {
 	return (
 		<MapContainer

@@ -6,20 +6,22 @@ import { twMerge } from "tailwind-merge";
 import "leaflet/dist/leaflet.css";
 import { useQuery } from "@tanstack/react-query";
 import React, { useCallback, useEffect, useRef } from "react";
-import { cloneDeep, compact } from "lodash";
+import { cloneDeep, compact, isNil } from "lodash";
 import { getRoute } from "../apis/routeApi";
 import { colorFiller } from "../utils/helpers/mapLineColorGenerator";
 import { Polyline } from "react-leaflet/Polyline";
 import { LatLngExpression, Map, PathOptions } from "leaflet";
 import { useGeoLocation } from "../utils/hooks/useGeoLocation";
 import { Marker } from "react-leaflet";
+import { OpenRouteServiceDirectionResponse } from "../utils/types/DirectionResponse";
 export interface ITravelMapProps extends React.HTMLProps<HTMLDivElement> {
 	locationArray: GeoJSON.Point[];
 	enrichmentArray?: (JSX.Element | undefined)[]; // used for rendering detail of marker
+	setResultFn?: (res: OpenRouteServiceDirectionResponse[]) => void;
 }
 export const TravelMap = (props: ITravelMapProps) => {
-	const { locationArray, enrichmentArray } = props;
-	const { data, isLoading } = useQuery({
+	const { locationArray, enrichmentArray, setResultFn } = props;
+	const { data } = useQuery({
 		queryKey: ["mapRoute", JSON.stringify(locationArray)],
 		queryFn: () => generateRoute(),
 	});
@@ -44,10 +46,6 @@ export const TravelMap = (props: ITravelMapProps) => {
 
 	const { location } = useGeoLocation();
 	const map = useRef<Map | null>(null);
-	useEffect(() => {
-		console.log(isLoading);
-		console.log(data);
-	}, [data, isLoading]);
 
 	//set center upon getting current location
 	useEffect(() => {
@@ -62,6 +60,11 @@ export const TravelMap = (props: ITravelMapProps) => {
 			);
 		}
 	}, [location]);
+	useEffect(() => {
+		if (!isNil(data) && setResultFn) {
+			setResultFn(data);
+		}
+	}, [data, setResultFn]);
 
 	const renderPolyline = () => {
 		console.log("rendering Polyline");

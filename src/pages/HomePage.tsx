@@ -1,13 +1,7 @@
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
 import { TravelMap } from "../components/travelMap";
 
 export const HomePage = () => {
 	return (
-		<>
-		<div>
-			<Header></Header>
-		</div>
 		<div className="min-h-100vh">
 			<TravelMap
 				locationArray={[
@@ -27,10 +21,6 @@ export const HomePage = () => {
 				enrichmentArray={[<p>haha</p>, undefined, <p>hehe</p>]}
 			></TravelMap>
 		</div>
-		<div>
-			<Footer></Footer>
-		</div>
-		</>
 
 	);
 };

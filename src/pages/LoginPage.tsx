@@ -15,8 +15,8 @@ export const LoginPage:React.FC = () => {
     });
 
 	return (
-		<div className="min-h-screen bg-grey-50 flex flex-col justify-center">
-            <div className='max-w-ad w-full mx-auto'>
+		<div className="bg-grey-50 flex flex-col justify-center">
+            <div className='mt-6 max-w-ad w-full mx-auto'>
                 <div className="max-w-ad w-3/5 mx-auto">
                     <div className='text-3xl font-bold text-gray-900 mt-2 text-center'>
                         Login

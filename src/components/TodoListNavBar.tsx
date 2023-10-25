@@ -1,22 +1,42 @@
-import {Link} from "react-router-dom"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, useNavigate  } from "react-router-dom"
 
-const TodoListNavBar = () => {
+interface TodoListNavBarProps {
+    setSelectedFilter: (filter: string) => void;
+  }
+
+export const TodoListNavBar = ({ setSelectedFilter }:TodoListNavBarProps) => {
 
   const [searchParams] = useSearchParams()
   const todosData = searchParams.get("todos")
+  const navigate = useNavigate();
+  
+  const updateFilter = (filterValue:string) => {
+    setSelectedFilter(filterValue); 
+    searchParams.set("todos", filterValue);
+    navigate(`?${searchParams.toString()}`, { replace: true });
+  };
 
   return (
-    <div className="w-full top-10">
-    <nav className="top-0 flex flex-col items-center min-h-screen">
-        <h2>Todo List</h2>
-        <Link className={todosData === null?"active":""}to="/">All</Link>
-        <Link className={todosData === "active"?"active":""}to="/?todos=active">Processing</Link>
-        <Link className={todosData === "completed"?"active":""}to="/?todos=completed">Completed</Link>
-       
-    </nav>
+    <div className=" bg-grey-50 flex flex-col justify-center mt-2">
+        <div className='max-w-ad w-full mx-auto'>
+            <div className="max-w-ad w-3/5 mx-auto">
+                <div className='text-3xl font-bold mt-2 text-left text-500'>
+                    <h2>To-do List</h2>
+                </div>
+                <div></div>
+            <nav className="w-55rem flex justify-between items-center border-b border-gray-300 mt-6 text-500 ">
+                <div className="hover:text-600">
+                    <button className={todosData === null ? "active" : ""} onClick={() => updateFilter("all")}>All</button>
+                </div>
+                <div className="hover:text-600">
+                    <button className={todosData === "active" ? "active" : ""} onClick={() => updateFilter("active")}>Processing</button>
+                </div>
+                <div className="hover:text-600">
+                    <button className={todosData === "completed" ? "active" : ""} onClick={() => updateFilter("completed")}>Completed</button>
+                </div>
+            </nav>
+         </div>
+        </div>
     </div>
   )
 }
-
-export default TodoListNavBar

@@ -66,13 +66,16 @@ export const TravelMap = (props: ITravelMapProps) => {
 	const renderPolyline = () => {
 		console.log("rendering Polyline");
 		const coordinateList = data?.map((e) => {
-			return e.features.flatMap((f) => {
+			return e?.features?.flatMap((f) => {
 				const coords = f.geometry.coordinates.map((g) => {
 					return cloneDeep(g).reverse();
 				});
 				return coords;
 			});
 		});
+		if (!coordinateList) {
+			return <></>;
+		}
 		const colorGenerator = colorFiller(["color"]);
 		return coordinateList?.map((e, i) => (
 			<Polyline

@@ -12,4 +12,5 @@ export interface Attraction {
 	phone: string | null;
 	website: string | null;
 	trips: Trip[];
+	order?: number;
 }

@@ -15,3 +15,4 @@ http.interceptors.request.use(
 		return Promise.reject(error);
 	}
 );
+export const authHttp = axios.create({ baseURL: env.VITE_API_HOST });

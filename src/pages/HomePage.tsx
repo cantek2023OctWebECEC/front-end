@@ -1,17 +1,10 @@
 import { TravelMap } from "../components/travelMap";
-import {MemberController} from "../components/MemberController";
-
 
 export const HomePage = () => {
 	return (
-		<>
-		<div className="min-h-100vh z-0">
+		<div className="min-h-100vh">
 			<TravelMap></TravelMap>
-			
 		</div>
-		<div >
-			<MemberController/>
-		</div>
-		</>
+
 	);
 };

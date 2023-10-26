@@ -21,6 +21,9 @@ function App() {
                 <a href="/" className="text-500 hover:underline">Schedule</a>
               </li>
               <li>
+                <a href="/member" className="text-500 hover:underline">Member</a>
+              </li>
+              <li>
                 <a href="/todo" className="text-500 hover:underline ">Todo List</a>
               </li>
               <li>

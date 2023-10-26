@@ -1,7 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import fakeTaskData from '../../public/FakeTododata.json'; // Import the JSON data
-//import axios from 'axios';
-
+//import {useForm} from 'react-hook-form'
 
 interface AddTodoListProps {
   selectedFilter: string;
@@ -15,22 +14,8 @@ export const AddTodoList: React.FC<AddTodoListProps> = ({selectedFilter}) => {
   
     //read fake data
       useEffect(() => {
-        
         setTasks(fakeTaskData.tasks);
-
-        /*const fetchData = async () => {
-          try {
-            const response = await axios.get('https://api.example.com/data');
-            setTasks(response.data);
-          } catch (error) {
-            console.error('API request error', error);
-          }
-        };
-    
-        fetchData();*/
-
       }, []);
-      
       
       //end 
 
@@ -93,7 +78,7 @@ export const AddTodoList: React.FC<AddTodoListProps> = ({selectedFilter}) => {
                     <option value="Member 3">Member 3</option>
                     {/* Add more members as needed */}
               </select>
-            <button onClick={addTask} className="bg-blue-500 text-white p-2 rounded bg-200">
+            <button onClick={addTask} className="bg-blue-500 text-white p-2 rounded">
               Add
             </button>
           </div>
@@ -109,21 +94,21 @@ export const AddTodoList: React.FC<AddTodoListProps> = ({selectedFilter}) => {
       return true; // Default to show all tasks
     })        
           .map((task, index) => (
-                    <li key={index} className={`flex flex-col md:flex-row justify-between items-start md:items-end mb-2 bg-white shadow-lg hover:bg-300 mt-5 px-5 py-5 w-full ${task.status === 'Complete' ? 'line-through' : ''}`} >
+                    <li key={index} className={`flex flex-col md:flex-row justify-between items-start md:items-center mb-2 bg-white shadow-lg hover:bg-300 mt-5 px-5 py-5 w-full ${task.status === 'Complete' ? 'line-through' : ''}`} >
                       <div className="w-2/3" onClick={() => {toggleTaskStatus(index)}}>
                         <div className="mb-2">
                            <span className="mr-4">{task.task}</span>
                           </div>
                           <div className="w-full my-3 border-b border-gray-200"></div>
-                          <div className="mb-2 flex flex-col md:flex-row justify-normal items-start md:items-center ">
+                          <div className="mb-2 flex flex-col md:flex-row justify-between items-start md:items-center">
                               <span className="text-sm text-gray-500">Assigned to: </span>
-                              <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm bg-400 ml-3">
+                              <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm bg-400">
                            {task.assignedTo.substring(0,2).toUpperCase()}
                           </div>
                           </div>
                           
                       </div>
-                        <button onClick={() => removeTask(index)} className={`text-red-500 rounded p-2 bg-200 ${
+                        <button onClick={() => removeTask(index)} className={`text-red-500 ${
                                 task.status === 'Complete' ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''}`} disabled={task.status === 'Complete'}>
                             Remove
                         </button>

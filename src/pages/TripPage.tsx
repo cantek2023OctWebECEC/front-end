@@ -6,6 +6,9 @@ import { MapWrapper } from "../components/mapWrapper";
 import { AttractionList } from "../components/AttractionList";
 import { ScheduleOrganizer } from "../components/ScheduleOrganizer";
 import { AttractionDetails } from "../components/AttractionDetails";
+import { Button } from "@mui/material";
+import { UpdateTripForm } from "../components/UpdateTripForm";
+import { MemberController } from "../components/MemberController";
 
 export const TripPage = () => {
 	const navigate = useNavigate();
@@ -33,21 +36,23 @@ export const TripPage = () => {
 					</div>
 					<div className="flex flex-col gap-2 min-w-[200px]">
 						<AttractionDetails></AttractionDetails>
-						<div>
-							<button
+						<div className="flex flex-col gap-2 ">
+							<Button
 								onClick={() => {
 									navigate(`/todo/${id}`);
 								}}
 							>
 								Todo
-							</button>
-							<button
+							</Button>
+							<Button
 								onClick={() => {
 									navigate(`/comment/${id}`);
 								}}
 							>
 								Comments
-							</button>
+							</Button>
+							<UpdateTripForm trip={data} />
+							<MemberController trip={data} />
 						</div>
 					</div>
 				</>

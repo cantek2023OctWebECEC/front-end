@@ -49,23 +49,21 @@ export const ScheduleOrganizerItem = ({
 									show
 								</button>
 								<button
-									onClick={() => {
-										async () => {
-											try {
-												await dissociateAttraction(
-													tripid,
-													item.id
-												);
-											} catch (err) {
-												alert(err);
-											} finally {
-												qc.invalidateQueries({
-													predicate: (query) =>
-														query.queryKey[0] ===
-														"showTrip",
-												});
-											}
-										};
+									onClick={async () => {
+										try {
+											await dissociateAttraction(
+												tripid,
+												item.id
+											);
+										} catch (err) {
+											alert(err);
+										} finally {
+											qc.invalidateQueries({
+												predicate: (query) =>
+													query.queryKey[0] ===
+													"showTrip",
+											});
+										}
 									}}
 								>
 									delete

@@ -1,8 +1,9 @@
-import { MemberController } from "../components/MemberController";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/rootReducer";
 import { Login } from "../redux/actions/authAction";
 import { TripCard } from "../components/TripCard";
+import { Button } from "@mui/material";
+import { AddTripForm } from "../components/AddTripForm";
 export const HomePage = () => {
 	//used for select trip, create trip, enter trip, delete trip
 	// const { data } = useQuery({
@@ -28,13 +29,14 @@ export const HomePage = () => {
 		<>
 			<div className="flex flex-col gap-2 p-2">
 				<div className="flex">
-					<button
+					<Button
 						onClick={() => {
 							refresh();
 						}}
 					>
 						refresh
-					</button>
+					</Button>
+					<AddTripForm></AddTripForm>
 				</div>
 				<div>
 					<h2> Owned Trip</h2>
@@ -71,7 +73,6 @@ export const HomePage = () => {
 						)}
 					</div>
 				</div>
-				<MemberController />
 			</div>
 		</>
 	);

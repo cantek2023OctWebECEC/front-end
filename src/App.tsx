@@ -36,14 +36,6 @@ function App() {
 									</li>
 									<li>
 										<a
-											href="/member"
-											className="text-500 hover:underline"
-										>
-											Member
-										</a>
-									</li>
-									<li>
-										<a
 											href="/todo"
 											className="text-500 hover:underline "
 										>

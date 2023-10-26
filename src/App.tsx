@@ -8,7 +8,7 @@ import { TodoList } from "./pages/TodoList";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/rootReducer";
 import { Logout } from "./redux/actions/authAction";
-
+import { Profile } from './pages/Profile-Page/ProfilePage';
 const queryClient = new QueryClient();
 function App() {
 	const { loggedin } = useSelector((state: RootState) => state.Auth);
@@ -51,6 +51,14 @@ function App() {
 										</a>
 									</li>
 									<li>
+										<a
+											href="/profile"
+											className="text-500 hover:underline "
+										>
+											Profile
+										</a>
+									</li>
+									<li>
 										{loggedin ? (
 											<div
 												onClick={() => {
@@ -76,6 +84,7 @@ function App() {
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<LoginPage />} />
 						<Route path="/todo" element={<TodoList />} />
+						<Route path="/profile/*" element={<Profile/>} />
 						<Route path="/error" element={<NotFoundPage />} />
 					</Routes>
 					{/*Footer */}

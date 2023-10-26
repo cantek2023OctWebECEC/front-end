@@ -1,0 +1,35 @@
+{
+    "members": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@example.com"
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "email": "jane@example.com"
+      },
+      {
+        "id": 3,
+        "name": "Coco YU",
+        "email": "cocoyu@example.com"
+      },
+      {
+        "id": 4,
+        "name": "Eric",
+        "email": "eric@example.com"
+      },
+      {
+        "id": 5,
+        "name": "Clavin",
+        "email": "clavin@example.com"
+      },
+      {
+        "id": 6,
+        "name": "Edward",
+        "email": "edward@example.com"
+      }
+    ]
+  }
+  

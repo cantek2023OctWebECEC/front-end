@@ -22,6 +22,9 @@ export const getUserByEmail = (email: string): Promise<AxiosResponse<User>> => {
 		email,
 	});
 };
+export const getAllUser = (): Promise<AxiosResponse<User[]>> => {
+	return http.get(`/user/list`);
+};
 export const updateUser = (
 	id: string,
 	user: Partial<User>

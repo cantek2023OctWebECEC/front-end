@@ -1,6 +1,6 @@
 import React from "react";
 import { ProfileNavBar } from "./component/NavBar";
-import { Header } from "../../components/Header";
+// import { Header } from "../../components/Header";
 import { Route, Routes } from "react-router-dom";
 import { AccountDetails } from "./component/AccountDetails";
 import { Trips } from "./component/Trips";
@@ -11,7 +11,7 @@ import {TripsList} from "./component/TripsList";
 export const Profile: React.FC = () => {
 	return (
 		<div>
-			<Header />
+			{/* <Header /> */}
 			<div className="container m-10 w-full mx-auto flex justify-center items-center ">
 				<ProfileNavBar />
 				

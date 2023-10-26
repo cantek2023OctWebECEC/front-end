@@ -7,7 +7,7 @@ export const Signout = () => {
 			Press here to sign out:
 			<button 
 			onClick={handleSignOutButton}
-			className="p-2 text-white hover-bg-blue-700 cursor-pointer border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ... rounded-lg w-1/6"
+			className="p-2 text-white hover-bg-blue-700 cursor-pointer border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ... rounded-lg w-1/6 text-100"
 			>Sign out</button>
 		</div>
 	);

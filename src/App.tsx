@@ -8,8 +8,16 @@ import { TodoList } from "./pages/TodoList";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./redux/rootReducer";
 import { Logout } from "./redux/actions/authAction";
-import { Profile } from './pages/Profile-Page/ProfilePage';
-const queryClient = new QueryClient();
+import { Profile } from "./pages/Profile-Page/ProfilePage";
+import { TripPage } from "./pages/TripPage";
+import AddCommentList from "./components/AddCommentList";
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			cacheTime: 1000 * 60 * 5, //  5 mins
+		},
+	},
+});
 function App() {
 	const { loggedin } = useSelector((state: RootState) => state.Auth);
 	const dispatch = useDispatch();
@@ -34,14 +42,14 @@ function App() {
 											Schedule
 										</a>
 									</li>
-									<li>
+									{/* <li>
 										<a
 											href="/todo"
 											className="text-500 hover:underline "
 										>
 											Todo List
 										</a>
-									</li>
+									</li> */}
 									<li>
 										<a
 											href="/profile"
@@ -75,8 +83,16 @@ function App() {
 					<Routes>
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<LoginPage />} />
-						<Route path="/todo" element={<TodoList />} />
-						<Route path="/profile/*" element={<Profile/>} />
+						<Route path="/todo/:id" element={<TodoList />} />
+						<Route
+							path="/comment/:id"
+							element={<AddCommentList />}
+						/>
+						<Route
+							path="/trip/:id"
+							element={<TripPage></TripPage>}
+						></Route>
+						<Route path="/profile/*" element={<Profile />} />
 						<Route path="/error" element={<NotFoundPage />} />
 					</Routes>
 					{/*Footer */}

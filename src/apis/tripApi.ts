@@ -1,4 +1,6 @@
+import { AxiosResponse } from "axios";
 import { http } from "./apiConfig";
+import { Trip } from "../utils/types/Trips";
 
 export const createTrip = (
 	organizerId: string,
@@ -15,7 +17,7 @@ export const listTrip = () => {
 	return http.get(`/trip`);
 };
 
-export const showTrip = (tripid: string) => {
+export const showTrip = (tripid: string): Promise<AxiosResponse<Trip>> => {
 	return http.get(`/trip/${tripid}`);
 };
 export const updateTrip = (tripid: string, name: string, startDate: Date) => {

@@ -1,122 +1,219 @@
-import React, { useState , useEffect } from 'react';
-import fakeTaskData from '../../public/FakeTododata.json'; // Import the JSON data
+import React, { useState, useEffect, useMemo } from "react";
+// import fakeTaskData from "../../public/FakeTododata.json"; // Import the JSON data
+import { useNavigate, useParams } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { showTrip } from "../apis/tripApi";
+import { compact } from "lodash";
+import { createTodo, deleteTodo, listTodo, updateTodo } from "../apis/todoApi";
+import { Todo } from "../utils/types/TodoList";
 //import {useForm} from 'react-hook-form'
 
 interface AddTodoListProps {
-  selectedFilter: string;
+	selectedFilter: string;
 }
 
-export const AddTodoList: React.FC<AddTodoListProps> = ({selectedFilter}) => {
-    const [selectedMember, setSelectedMember] = useState<string>('');
+export const AddTodoList: React.FC<AddTodoListProps> = ({ selectedFilter }) => {
+	const navigate = useNavigate();
+	const { id } = useParams();
+	const qc = useQueryClient();
 
-    const [tasks, setTasks] = useState<{ task: string; status: 'active' | 'Complete'| string; assignedTo: string }[]>([]);
-    const [newTask, setNewTask] = useState<string>('');
-  
-    //read fake data
-      useEffect(() => {
-        setTasks(fakeTaskData.tasks);
-      }, []);
-      
-      //end 
+	useEffect(() => {
+		if (!id) {
+			navigate("/error");
+		}
+	}, [id]);
+	const { data: trip } = useQuery({
+		//@ts-ignore
+		queryKey: ["showTrip", id as string],
+		queryFn: async ({ queryKey }: { queryKey: string[] }) =>
+			(await showTrip(queryKey[1])).data,
+		enabled: !!id,
+	});
+	const { memberList } = useMemo(() => {
+		return {
+			memberList: compact([
+				...(trip?.participants ?? []),
+				trip?.organizer,
+			]),
+		};
+	}, [trip]);
+	const { data: todos } = useQuery({
+		//@ts-ignore
+		queryKey: ["listTodo", trip.id as string],
+		queryFn: async ({ queryKey }: { queryKey: string[] }) => {
+			const result = (await listTodo({ tripId: queryKey[1] })).data;
+			console.log(result);
+			return result;
+		},
+		enabled: !!trip?.id,
+	});
 
-    const addTask = () => {
-        if (newTask.trim() !== '') {
-          const newTaskItem = {
-            task: newTask,
-            status: 'active',
-            assignedTo: selectedMember, // Assign the selected member
-        };
-          console.log('New Task Status:', newTaskItem.status);
-          console.log('Selected Member:', newTaskItem.assignedTo);
-          // Add the new task to the JSON data
-          fakeTaskData.tasks.push(newTaskItem);
+	const [selectedMember, setSelectedMember] = useState<string>("");
 
-          setTasks([...tasks, newTaskItem,]);
-          setNewTask('');
-          setSelectedMember('');
+	// const [tasks, setTasks] = useState<
+	// 	{
+	// 		task: string;
+	// 		status: "active" | "Complete" | string;
+	// 		assignedTo: string;
+	// 	}[]
+	// >([]);
+	const [newTask, setNewTask] = useState<string>("");
 
-          
-        }
-        
-    };
+	//read fake data
+	// useEffect(() => {
+	// 	setTasks(fakeTaskData.tasks);
+	// }, []);
 
-   
+	//end
 
-    const removeTask = (index: number) => {
-      const taskName = tasks[index].task; 
-      const updatedTasks = [...tasks];
-      updatedTasks.splice(index, 1);
-      setTasks(updatedTasks);
-      console.log(`Removed task: ${taskName}`);
-    };
+	const addTask = async () => {
+		try {
+			if (newTask.trim() !== "") {
+				const newTaskItem = {
+					title: newTask,
+					assigneeId: selectedMember, // Assign the selected member
+					tripId: trip?.id,
+				};
+				// console.log("New Task Status:", newTaskItem.status);
+				// console.log("Selected Member:", newTaskItem.assignedTo);
+				// Add the new task to the JSON data
+				// fakeTaskData.tasks.push(newTaskItem);
 
-    const toggleTaskStatus = (index: number) => {
-      const updatedTasks = [...tasks];
-      const currentStatus = updatedTasks[index].status;
-      // Toggle the status between 'Processing' and 'Complete'
-      updatedTasks[index].status = currentStatus === 'active' ? 'Complete' : 'active';
-      setTasks(updatedTasks);
-      console.log("current tasks status: "+ updatedTasks[index].status);
+				// setTasks([...tasks, newTaskItem]);
+				await createTodo(newTaskItem);
+				setNewTask("");
+				setSelectedMember("");
+			}
+		} catch (err) {
+			console.error(err);
+			alert(err);
+		} finally {
+			qc.invalidateQueries({
+				predicate: (query) =>
+					query.queryKey[0] === "showTrip" ||
+					query.queryKey[0] === "listTodo",
+			});
+		}
+	};
 
-      //update fake data
-      const updatedFakeTaskData = [...fakeTaskData.tasks];
-      updatedFakeTaskData[index].status = updatedTasks[index].status;
-    };
+	const removeTask = async (id: string) => {
+		try {
+			await deleteTodo(id);
+			console.log(`Removed task: ${id}`);
+		} catch (err) {
+			console.error(err);
+			alert(err);
+		} finally {
+			qc.invalidateQueries({
+				predicate: (query) =>
+					query.queryKey[0] === "showTrip" ||
+					query.queryKey[0] === "listTodo",
+			});
+		}
+	};
 
-    return (
-        <div className="max-w-md mx-auto p-4 mb-4">
-            <div className="flex space-x-2 mb-4">
-            <input type="text" value={newTask} onChange={(e) => setNewTask(e.target.value)} className="w-full p-2 border" placeholder="Add a task"/>
-            <select
-                    value={selectedMember}
-                    onChange={(e) => setSelectedMember(e.target.value)}
-                    className="p-2 border"
-                >
-                    <option value="">Select Member</option>
-                    <option value="Member 1">Member 1</option>
-                    <option value="Member 2">Member 2</option>
-                    <option value="Member 3">Member 3</option>
-                    {/* Add more members as needed */}
-              </select>
-            <button onClick={addTask} className="bg-blue-500 text-white p-2 rounded">
-              Add
-            </button>
-          </div>
-          <ul>
-          {tasks.filter((task) => {
-      if (selectedFilter === 'all') {
-        return true; // Show all tasks
-      } else if (selectedFilter === 'active') {
-        return task.status === 'active'; // Show only active tasks
-      } else if (selectedFilter === 'completed') {
-        return task.status === 'Complete'; // Show only completed tasks
-      }
-      return true; // Default to show all tasks
-    })        
-          .map((task, index) => (
-                    <li key={index} className={`flex flex-col md:flex-row justify-between items-start md:items-center mb-2 bg-white shadow-lg hover:bg-300 mt-5 px-5 py-5 w-full ${task.status === 'Complete' ? 'line-through' : ''}`} >
-                      <div className="w-2/3" onClick={() => {toggleTaskStatus(index)}}>
-                        <div className="mb-2">
-                           <span className="mr-4">{task.task}</span>
-                          </div>
-                          <div className="w-full my-3 border-b border-gray-200"></div>
-                          <div className="mb-2 flex flex-col md:flex-row justify-between items-start md:items-center">
-                              <span className="text-sm text-gray-500">Assigned to: </span>
-                              <div className="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-sm bg-400">
-                           {task.assignedTo.substring(0,2).toUpperCase()}
-                          </div>
-                          </div>
-                          
-                      </div>
-                        <button onClick={() => removeTask(index)} className={`text-red-500 ${
-                                task.status === 'Complete' ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''}`} disabled={task.status === 'Complete'}>
-                            Remove
-                        </button>
-                    </li>
-                ))}
-          </ul>
-        </div>
-      );
-    };
-    
+	const toggleTaskStatus = async (id: string) => {
+		try {
+			const thisTask = todos?.find(
+				(e) => e.id === id
+			) as NonNullable<Todo>;
+			await updateTodo(id, { done: !thisTask.done });
+		} catch (err) {
+			console.error(err);
+			alert(err);
+		} finally {
+			qc.invalidateQueries({
+				predicate: (query) =>
+					query.queryKey[0] === "showTrip" ||
+					query.queryKey[0] === "listTodo",
+			});
+		}
+	};
+
+	return (
+		<div className="max-w-md p-4 mx-auto mb-4">
+			<div className="flex mb-4 space-x-2">
+				<input
+					type="text"
+					value={newTask}
+					onChange={(e) => setNewTask(e.target.value)}
+					className="w-full p-2 border"
+					placeholder="Add a task"
+				/>
+				<select
+					value={selectedMember}
+					onChange={(e) => setSelectedMember(e.target.value)}
+					className="p-2 border"
+				>
+					<option value="">Select Member</option>
+					{memberList.map((e) => (
+						<option value={e.id}>{e.username}</option>
+					))}
+					{/* Add more members as needed */}
+				</select>
+				<button
+					onClick={addTask}
+					className="p-2 text-white bg-blue-500 rounded"
+				>
+					Add
+				</button>
+			</div>
+			<ul>
+				{todos
+					?.filter((todo) => {
+						if (selectedFilter === "all") {
+							return true; // Show all tasks
+						} else if (selectedFilter === "active") {
+							return todo.done === false; // Show only active tasks
+						} else if (selectedFilter === "completed") {
+							return todo.done === true; // Show only completed tasks
+						}
+						return true; // Default to show all tasks
+					})
+					.map((todo, index) => (
+						<li
+							key={index}
+							className={`flex flex-col md:flex-row justify-between items-start md:items-center mb-2 bg-white shadow-lg hover:bg-300 mt-5 px-5 py-5 w-full ${
+								todo.done ? "line-through" : ""
+							}`}
+						>
+							<div
+								className="w-2/3"
+								onClick={() => {
+									toggleTaskStatus(todo.id);
+								}}
+							>
+								<div className="mb-2">
+									<span className="mr-4">{todo.title}</span>
+								</div>
+								<div className="w-full my-3 border-b border-gray-200"></div>
+								<div className="flex flex-col items-start justify-between mb-2 md:flex-row md:items-center">
+									<span className="text-sm text-gray-500">
+										Assigned to:{" "}
+									</span>
+									<div className="flex items-center justify-center w-8 h-8 text-sm text-white bg-blue-500 rounded-full bg-400">
+										{todo.assignee?.username
+											.substring(0, 2)
+											.toUpperCase()}
+									</div>
+								</div>
+							</div>
+							<button
+								onClick={() => removeTask(todo.id)}
+								className={`text-red-500 ${
+									todo.done
+										? "bg-gray-300 text-gray-500 cursor-not-allowed"
+										: ""
+								}`}
+								disabled={todo.done}
+							>
+								Remove
+							</button>
+						</li>
+					))}
+			</ul>
+		</div>
+	);
+};
+
 export default AddTodoList;

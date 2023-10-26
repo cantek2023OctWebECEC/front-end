@@ -1,8 +1,6 @@
-import { PaginatedItems } from "./TripsPaginatedItems";
-
+// import { PaginatedItems } from "./TripsPaginatedItems";
 
 export const TripsList = () => {
-	
 	return (
 		<>
 			<div className="m-10">
@@ -20,8 +18,8 @@ export const TripsList = () => {
 						</select>
 					</div> */}
 				</div>
-				
-                <PaginatedItems itemsPerPage={4} />
+
+				{/* <PaginatedItems itemsPerPage={4} /> */}
 			</div>
 		</>
 	);

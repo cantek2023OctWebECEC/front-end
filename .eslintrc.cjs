@@ -16,5 +16,6 @@ module.exports = {
 		],
 		"@typescript-eslint/no-explicit-any": ["off"],
 		"no-fallthrough": ["off"],
+		"@typescript-eslint/ban-ts-comment": ["off"],
 	},
 };

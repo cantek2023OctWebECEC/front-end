@@ -14,7 +14,7 @@ export const LoginPage: React.FC = () => {
 	const dispatch = useDispatch();
 	const { register, handleSubmit } = useForm<FormData>();
 
-	const onSubmit = handleSubmit((formData) => {
+	const onSubmit = handleSubmit((formData: FormData) => {
 		dispatch(Login(formData.email, formData.password));
 	});
 	const info = useSelector((state: RootState) => state.Auth);
@@ -26,8 +26,7 @@ export const LoginPage: React.FC = () => {
 					<div className="mt-2 text-3xl font-bold text-center text-gray-900">
 						Login
 					</div>
-
-					<div className="w-full p-8 mx-auto mt-4 bg-white border max-w-ad border-grey-300">
+					<div className="w-full p-8 px-5 py-5 mx-auto mt-4 mt-5 bg-white shadow-lg max-w-ad w-ful">
 						<form
 							action=""
 							className="space-y-6"
@@ -69,13 +68,21 @@ export const LoginPage: React.FC = () => {
 							<div>
 								<a
 									href=""
-									className="font-medium text-blue-500 text-dm"
+									className="font-medium text-blue-500 text-dm hover:underline"
 								>
 									Forgot Password
 								</a>
 							</div>
 							<div>
-								<button className="w-full px-4 py-2 text-sm text-white bg-blue-600 rounded-md hover:bg-blue-700">
+								<a
+									href=""
+									className="font-medium text-blue-500 text-dm hover:underline"
+								>
+									Reset Password
+								</a>
+							</div>
+							<div>
+								<button className="w-8 w-full h-8 px-4 py-2 text-sm text-white rounded-md rounded-full bg-200 hover:bg-100">
 									Submit
 								</button>
 							</div>

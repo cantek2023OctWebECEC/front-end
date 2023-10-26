@@ -12,7 +12,7 @@ function Items({ currentItems }: { currentItems: Comment[] }) {
 		{currentItems && currentItems.map((data, i) => (
 		  <div key={i} className="mb-2 p-3 border-dashed border-2 border-indigo-600 ...">
 			<div className="text-ellipsis overflow-hidden ...">
-			  Trip: {data.createdAt.toLocaleString()} 
+			  Created at: {data.createdAt.toLocaleString()} 
 			</div>
 			<div className="pt-2 text-ellipsis overflow-hidden ...">
 			  Comment: {data.content || 'No comment'}
@@ -26,6 +26,9 @@ function Items({ currentItems }: { currentItems: Comment[] }) {
 export function CommentPaginatedItems({ itemsPerPage }: { itemsPerPage: number }) {
 	const info:IAuthReducer = useSelector((state: RootState) => state.Auth);
 	let commentList = info.userinfo?.comments ?? []as Comment[];
+
+// const comment = (await listComment(userid,tripId))
+
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + itemsPerPage;

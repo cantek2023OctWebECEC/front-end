@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 import { Dummy } from "../assets/DummyData";
+import { RootState } from '../../../redux/rootReducer';
+import { useSelector } from 'react-redux';
+import { IAuthReducer } from '../../../redux/reducers/authReducer';
 
 let tripsList = Dummy.trips;
 interface DummyTripList {
@@ -45,6 +48,7 @@ function Items({ currentItems }:{currentItems: DummyTripList[]}) {
 }
 
 export function PaginatedItems({ itemsPerPage}:{itemsPerPage: number}) {
+  const info:IAuthReducer = useSelector((state: RootState) => state.Auth);
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);

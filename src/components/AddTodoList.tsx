@@ -112,6 +112,7 @@ export const AddTodoList: React.FC<AddTodoListProps> = ({ selectedFilter }) => {
 		}
 	};
 
+
 	const toggleTaskStatus = async (id: string) => {
 		try {
 			const thisTask = todos?.find(
@@ -217,3 +218,4 @@ export const AddTodoList: React.FC<AddTodoListProps> = ({ selectedFilter }) => {
 };
 
 export default AddTodoList;
+

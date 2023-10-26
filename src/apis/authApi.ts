@@ -22,3 +22,8 @@ export const login = (
 		}
 	);
 };
+export const resetPassword = (email: string) => {
+    return authHttp.post(`/auth/resetPassword`, {
+        email,
+    });
+};

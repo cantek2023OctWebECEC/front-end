@@ -1,96 +1,87 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Login } from "../redux/actions/authAction";
-import { RootState } from "../redux/rootReducer";
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
-	email: string;
-	password: string;
-	remember: boolean;
+    email: string;
+    password: string;
+    remember: boolean;
 }
 
 export const LoginPage: React.FC = () => {
-	const dispatch = useDispatch();
-	const { register, handleSubmit } = useForm<FormData>();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { register, handleSubmit } = useForm<FormData>();
 
-	const onSubmit = handleSubmit((formData: FormData) => {
-		dispatch(Login(formData.email, formData.password));
-	});
-	const info = useSelector((state: RootState) => state.Auth);
+    const onSubmit = handleSubmit((formData: FormData) => {
+        dispatch(Login(formData.email, formData.password));
+        navigate('/');
+    });
 
-	return (
-		<div className="flex flex-col justify-center bg-grey-50">
-			<div className="w-full mx-auto mt-6 max-w-ad">
-				<div className="w-3/5 mx-auto max-w-ad">
-					<div className="mt-2 text-3xl font-bold text-center text-gray-900">
-						Login
-					</div>
-					<div className="w-full p-8 px-5 py-5 mx-auto mt-4 mt-5 bg-white shadow-lg max-w-ad w-ful">
-						<form
-							action=""
-							className="space-y-6"
-							onSubmit={onSubmit}
-						>
-							<div>
-								<label className="block text-sm text-gray-600 font-blod">
-									Email
-								</label>
-								<input
-									type="text"
-									{...register("email")}
-									name="email"
-									className="w-full p-2 mt-1 border border-gray-300 rounded"
-								/>
-							</div>
-							<div>
-								<label className="block text-sm text-gray-600 font-blod">
-									Password
-								</label>
-								<input
-									type="password"
-									{...register("password")}
-									name="password"
-									className="w-full p-2 mt-1 border border-gray-300 rounded"
-								/>
-							</div>
-							<div>
-								<input
-									type="checkbox"
-									{...register("remember")}
-									name="remember"
-									className="w-4 h-4 text-blue-300 rounded"
-								/>
-								<label className="ml-2 text-sm text-gray-600">
-									Remeber me
-								</label>
-							</div>
-							<div>
-								<a
-									href=""
-									className="font-medium text-blue-500 text-dm hover:underline"
-								>
-									Forgot Password
-								</a>
-							</div>
-							<div>
-								<a
-									href=""
-									className="font-medium text-blue-500 text-dm hover:underline"
-								>
-									Reset Password
-								</a>
-							</div>
-							<div>
-								<button className="w-8 w-full h-8 px-4 py-2 text-sm text-white rounded-md rounded-full bg-200 hover:bg-100">
-									Submit
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<p>{JSON.stringify(info)}</p>
-		</div>
-	);
+    return (
+        <div className="flex flex-col justify-center bg-grey-50">
+            <div className="w-full mx-auto mt-6 max-w-ad">
+                <div className="w-3/5 mx-auto max-w-ad">
+                    <div className="mt-2 text-3xl font-bold text-center text-gray-900">
+                        Login
+                    </div>
+                    <div className="w-full p-8 px-5 py-5 mx-auto mt-4 mt-5 bg-white shadow-lg max-w-ad w-ful">
+                        <form
+                            action=""
+                            className="space-y-6"
+                            onSubmit={onSubmit}
+                        >
+                            <div>
+                                <label className="block text-sm text-gray-600 font-blod">
+                                    Email
+                                </label>
+                                <input
+                                    type="text"
+                                    {...register("email")}
+                                    name="email"
+                                    className="w-full p-2 mt-1 border border-gray-300 rounded"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm text-gray-600 font-blod">
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    {...register("password")}
+                                    name="password"
+                                    className="w-full p-2 mt-1 border border-gray-300 rounded"
+                                />
+                            </div>
+                            <div>
+                                <input
+                                    type="checkbox"
+                                    {...register("remember")}
+                                    name="remember"
+                                    className="w-4 h-4 text-blue-300 rounded"
+                                />
+                                <label className="ml-2 text-sm text-gray-600">
+                                    Remeber me
+                                </label>
+                            </div>
+                            <div>
+                                <a
+                                    href="/resetpassword"
+                                    className="font-medium text-blue-500 text-dm"
+                                >
+                                    Forgot Password
+                                </a>
+                            </div>
+                            <div className='grid place-items-center'>
+                                <button className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white text-sm">Submit</button>
+                                <a href="/signup" className="w-full py-2 px-4 text-sm text-center text-blue-500">Sign Up</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };

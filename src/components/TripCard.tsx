@@ -13,13 +13,14 @@ export const TripCard = ({ trip, className }: ITripCardProps) => {
 	return (
 		<div
 			className={twMerge(
-				"p-5 bg-white shadow-lg hover:opacity-5 flex flex-col cursor-pointer",
+				"p-5 bg-white shadow-lg hover:opacity-50 flex flex-col cursor-pointer",
 				className
 			)}
 			onClick={() => navigate(`/trip/${trip.id}`)}
 		>
-			<p>{trip.name}</p>
-			<p>{dayjs(trip.startDate).toISOString()}</p>
+			<p className="text-xl">{trip.name}</p>
+			<hr className="mt-2"></hr>
+			<p>start date: {dayjs(trip.startDate).format("YYYY-MM-DD")}</p>
 		</div>
 	);
 };

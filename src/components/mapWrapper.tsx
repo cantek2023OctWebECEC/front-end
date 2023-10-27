@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 // this component is used to query data for things this is just a dummy component
 
 // import { useQuery } from "@tanstack/react-query";
@@ -44,49 +45,92 @@ export const MapWrapper = ({ trip }: IMapWrapperProps) => {
 			<div className="flex gap-4 max-w-11/12">
 				<table>
 					<tbody>
-						<tr><td>
-						<table className="border-collapse min-w-full divide-y divide-gray-200 border">
-							<tbody className="bg-white divide-y divide-gray-200">
-							<tr className="col-span-3">
-								<td className="p-2 col-span-3">per segment: </td>
-							</tr>
-							{segments.map((segment, index) => (
-								<tr key={index}>
-								<td className="col-span-2">Segment {index + 1}</td>
-								<td className="p-2">Distance: {segment.distance} meters</td>
-								<td className="p-2">Duration: {segment.duration}</td>
-								</tr>
-							))}
-							</tbody>
-						</table>
-						
-						</td>
-						<td>
-						<table>
-							<tbody>
-							<tr>
-								<td>
-								<table className="border-collapse min-w-full divide-y divide-gray-200 border">
+						<tr>
+							<td>
+								<table className="min-w-full border border-collapse divide-y divide-gray-200">
 									<tbody className="bg-white divide-y divide-gray-200">
-									<tr>
-										<td className="p-2">Total distance: </td>
-										<td className="p-2">Total duration: </td>
-									</tr>
-									<tr>
-										<td className="p-2">
-										{total && total ? JSON.stringify(total.distance).replace(/"/g, '') : 'N/A'}
-										</td>
-										<td className="p-2">
-										{total && total ? JSON.stringify(total.duration).replace(/"/g, '') : 'N/A'}
-										</td>
-									</tr>
+										<tr className="col-span-3">
+											<td className="col-span-3 p-2">
+												per segment:{" "}
+											</td>
+										</tr>
+										{segments.map((segment, index) => (
+											<tr key={index}>
+												<td className="col-span-2">
+													Segment {index + 1}
+												</td>
+												<td className="p-2">
+													Distance:{" "}
+													{(
+														segment.distance / 1000
+													).toFixed(2)}{" "}
+													km
+												</td>
+												<td className="p-2">
+													Duration:{" "}
+													{`${(
+														segment.duration / 60
+													).toFixed(2)} mins`}
+												</td>
+											</tr>
+										))}
 									</tbody>
 								</table>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-						</td>
+							</td>
+							<td>
+								<table>
+									<tbody>
+										<tr>
+											<td>
+												<table className="min-w-full border border-collapse divide-y divide-gray-200">
+													<tbody className="bg-white divide-y divide-gray-200">
+														<tr>
+															<td className="p-2">
+																Total distance:{" "}
+															</td>
+															<td className="p-2">
+																Total duration:{" "}
+															</td>
+														</tr>
+														<tr>
+															<td className="p-2">
+																{total && total
+																	? JSON.stringify(
+																			`${(
+																				total.distance /
+																				1000
+																			).toFixed(
+																				2
+																			)} km`
+																	  ).replace(
+																			/"/g,
+																			""
+																	  )
+																	: "N/A"}
+															</td>
+															<td className="p-2">
+																{total && total
+																	? JSON.stringify(
+																			`${(
+																				total.duration /
+																				60
+																			).toFixed(
+																				2
+																			)} mins`
+																	  ).replace(
+																			/"/g,
+																			""
+																	  )
+																	: "N/A"}
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
 						</tr>
 					</tbody>
 				</table>

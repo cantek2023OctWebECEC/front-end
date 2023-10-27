@@ -10,7 +10,7 @@ import { RootState } from "./redux/rootReducer";
 import { Logout } from "./redux/actions/authAction";
 import { Profile } from "./pages/Profile-Page/ProfilePage";
 import { TripPage } from "./pages/TripPage";
-import { SignupPage } from './pages/SignupPage';
+import { SignupPage } from "./pages/SignupPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import AddCommentList from "./components/AddCommentList";
 
@@ -54,17 +54,21 @@ function App() {
 										</a>
 									</li> */}
 									<li>
-										<a
-											href="/profile"
-											className="text-500 hover:underline "
-										>
-											Profile
-										</a>
+										{loggedin ? (
+											<a
+												href="/profile"
+												className="text-500 hover:underline "
+											>
+												Profile
+											</a>
+										) : (
+											<></>
+										)}
 									</li>
 									<li>
 										{loggedin ? (
 											<a
-                        href="/"
+												href="/"
 												onClick={() => {
 													dispatch(Logout());
 												}}
@@ -87,8 +91,11 @@ function App() {
 					<Routes>
 						<Route path="/" element={<HomePage />} />
 						<Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/resetpassword" element={<ResetPasswordPage/>}/>
+						<Route path="/signup" element={<SignupPage />} />
+						<Route
+							path="/resetpassword"
+							element={<ResetPasswordPage />}
+						/>
 						<Route path="/todo/:id" element={<TodoList />} />
 						<Route
 							path="/comment/:id"

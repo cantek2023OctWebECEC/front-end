@@ -18,31 +18,31 @@ export const ProfileNavBar = () => {
 			</div>
 			<Link to="/profile/" className="cursor-pointer ">
 				<li
-					className={`m-auto p-auto p-2 text-white border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ${
+					className={`m-auto p-auto p-2 text-black border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ${
 						activeLink === "" ? "bg-200" : ""
 					}`}
 				>
 					Account Details
 				</li>
 			</Link>
-			{/* <Link to="/profile/Trips">
-        <li
-          className={`p-2 text-white cursor-pointer border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ${
-            activeLink === "Trips" ? "bg-200" : ""
-          }`}
-        >
-          Trips
-        </li>
-      </Link> */}
-			<Link to="/profile/Signout">
+			<Link to="/profile/Trips">
 				<li
-					className={`p-2 text-white cursor-pointer border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ${
+					className={`p-2 text-black cursor-pointer border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ${
+						activeLink === "Trips" ? "bg-200" : ""
+					}`}
+				>
+					Trips
+				</li>
+			</Link>
+			{/* <Link to="/profile/Signout">
+				<li
+					className={`p-2 text-black cursor-pointer border-solid border-2 border-indigo-600 my-2 text-ellipsis overflow-hidden ${
 						activeLink === "Signout" ? "bg-200" : ""
 					}`}
 				>
 					Signout
 				</li>
-			</Link>
+			</Link> */}
 		</ul>
 	);
 };

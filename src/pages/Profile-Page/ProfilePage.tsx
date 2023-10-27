@@ -7,6 +7,7 @@ import { AccountDetails } from "./component/AccountDetails";
 import { Signout } from "./component/Signout";
 import { AccountDetailsList } from "./component/AccountDetailsList";
 import { TripsList } from "./component/TripsList";
+import { Trips } from "./component/Trips";
 
 export const Profile: React.FC = () => {
 	return (
@@ -17,7 +18,7 @@ export const Profile: React.FC = () => {
 
 				<Routes>
 					<Route path="" element={<AccountDetails />} />
-					{/* <Route path="Trips" element={<Trips />} /> */}
+					<Route path="Trips" element={<Trips />} />
 					<Route path="Signout" element={<Signout />} />
 				</Routes>
 			</div>

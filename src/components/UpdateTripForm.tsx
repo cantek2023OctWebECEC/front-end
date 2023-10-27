@@ -74,6 +74,7 @@ export const UpdateTripForm = ({ trip }: IUpdateTripFormProps) => {
 								type="button"
 								onClick={() => {
 									handleSubmit();
+									setOpen(false);
 								}}
 							>
 								Submit

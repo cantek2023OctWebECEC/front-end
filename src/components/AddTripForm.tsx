@@ -76,6 +76,7 @@ export const AddTripForm = () => {
 								type="button"
 								onClick={() => {
 									handleSubmit();
+									setOpen(false);
 								}}
 							>
 								Submit

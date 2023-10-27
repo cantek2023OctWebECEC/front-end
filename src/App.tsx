@@ -13,6 +13,7 @@ import { TripPage } from "./pages/TripPage";
 import { SignupPage } from "./pages/SignupPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import AddCommentList from "./components/AddCommentList";
+import Icon from "../public/images.png";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -33,7 +34,9 @@ function App() {
 					<nav className="p-4 bg-300">
 						<div className="container mx-auto">
 							<div className="flex items-center justify-between">
-								<div className="text-xl font-bold text-500">
+								
+								<div className="text-xl font-bold text-500 flex justify-between items-center">
+								<img src={Icon} className="w-10 h-10"></img>
 									Travel Planning App
 								</div>
 								<ul className="flex space-x-4">

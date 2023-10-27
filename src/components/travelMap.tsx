@@ -1,7 +1,6 @@
 import { MapContainer } from "react-leaflet/MapContainer";
-import { TileLayer } from "react-leaflet/TileLayer";
+// import { TileLayer } from "react-leaflet/TileLayer";
 // import { useMap } from 'react-leaflet/hooks'
-import { Popup } from "react-leaflet/Popup";
 import { twMerge } from "tailwind-merge";
 import "leaflet/dist/leaflet.css";
 import { useQuery } from "@tanstack/react-query";
@@ -12,8 +11,23 @@ import { colorFiller } from "../utils/helpers/mapLineColorGenerator";
 import { Polyline } from "react-leaflet/Polyline";
 import { LatLngExpression, Map, PathOptions } from "leaflet";
 import { useGeoLocation } from "../utils/hooks/useGeoLocation";
-import { Marker } from "react-leaflet";
+// import { Marker } from "react-leaflet";
 import { OpenRouteServiceDirectionResponse } from "../utils/types/DirectionResponse";
+import L from "leaflet";
+import { TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+
+const DefaultIcon = L.icon({
+	iconUrl: icon,
+	shadowUrl: iconShadow,
+	iconSize: [20, 32],
+	iconAnchor: [10, 32],
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 export interface ITravelMapProps extends React.HTMLProps<HTMLDivElement> {
 	locationArray: GeoJSON.Point[];
 	enrichmentArray?: (JSX.Element | undefined)[]; // used for rendering detail of marker
@@ -115,7 +129,7 @@ export const TravelMap = (props: ITravelMapProps) => {
 	return (
 		<MapContainer
 			className={twMerge("w-11/12 h-96", props.className)}
-			center={[43.651070, -79.347015]}
+			center={[43.65107, -79.347015]}
 			zoom={13}
 			scrollWheelZoom={false}
 			ref={map}

@@ -79,7 +79,7 @@ export const AddCommentList = () => {
 	};
 
 	return (
-		<div className="max-w-md p-4 mx-auto mb-4">
+		<div className="min-w-full p-4 mx-auto mb-4">
 			<div className="flex mb-4 space-x-2">
 				<input
 					type="text"
@@ -95,20 +95,20 @@ export const AddCommentList = () => {
 					Add
 				</button>
 			</div>
-			<ul>
+			<ul className="min-w-full">
 				{comments?.map((comment, index) => (
 					<li
 						key={index}
 						className={`flex flex-col md:flex-row justify-between items-start md:items-center mb-2 bg-white shadow-lg hover:bg-300 mt-5 px-5 py-5 w-full `}
 					>
-						<div className="w-2/3">
+						<div className="w-full">
 							<div className="mb-2">
 								<span className="mr-4">{comment.content}</span>
 							</div>
 							<div className="w-full my-3 border-b border-gray-200"></div>
 							<div className="flex flex-col items-start justify-between mb-2 md:flex-row md:items-center">
 								<span className="text-sm text-gray-500">
-									Published by:{comment.user.username}
+									Published by:  {comment.user.username}
 								</span>
 								<div className="flex items-center justify-center w-8 h-8 text-sm text-white bg-blue-500 rounded-full bg-400">
 									{comment.user.username

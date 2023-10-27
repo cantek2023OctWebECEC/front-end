@@ -38,10 +38,11 @@ export const ScheduleOrganizerItem = ({
 					>
 						<div className="flex flex-col gap-4">
 							<div className="flex items-center justify-between">
-								<h3 className="text-lg font-bold max-w-[40px]">
+								<h3 className="text-lg font-bold w-full">
 									{item.name}
 								</h3>
-								<button className="bg-400 text-gray-500 rounded-lg p-2"
+								<div className="px-4 py-2  flex justify-end items-start">
+								<button className="bg-400 text-gray-500 rounded-lg p-2 mr-4 "
 									onClick={() => {
 										setAttr(item);
 									}}
@@ -68,13 +69,18 @@ export const ScheduleOrganizerItem = ({
 								>
 									delete
 								</button>
+								</div>
 							</div>
 							<div className="flex items-center justify-between">
-								<p>{item.name}</p>
-								<p>{item.address_full}</p>
-								<p>{item.category}</p>
-								<p>{item.email}</p>
-								<p>{item.phone}</p>
+								<table className="text-left">
+									<tbody>
+										<tr><td>Name: </td><td>{item.name}</td></tr>
+										<tr><td>Address: </td><td>{item.address_full}</td></tr>
+										<tr><td>Category: </td><td>{item.category}</td></tr>
+										<tr><td>Email: </td><td>{item.email}</td></tr>
+										<tr><td>Phone: </td><td>{item.phone}</td></tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>

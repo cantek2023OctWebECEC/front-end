@@ -47,6 +47,7 @@ export const UpdateTripForm = ({ trip }: IUpdateTripFormProps) => {
 			<Dialog open={open} onClose={() => setOpen(false)}>
 				<DialogTitle>Update Trip</DialogTitle>
 				<DialogContent>
+					<div className="my-2">
 					<form>
 						<TextField
 							label="name"
@@ -57,6 +58,7 @@ export const UpdateTripForm = ({ trip }: IUpdateTripFormProps) => {
 						></TextField>
 						<input
 							// label="startDate"
+							className="ml-4"
 							value={startDate}
 							type="date"
 							onChange={(event) =>
@@ -67,6 +69,7 @@ export const UpdateTripForm = ({ trip }: IUpdateTripFormProps) => {
 							}
 						/>
 						<DialogActions>
+							<div className="bg-200 rounded-lg p-2">
 							<Button
 								type="button"
 								onClick={() => {
@@ -75,17 +78,22 @@ export const UpdateTripForm = ({ trip }: IUpdateTripFormProps) => {
 							>
 								Submit
 							</Button>
-							<Button
+							</div>
+							<div className="p-0 flex justify-end items-start absolute top-3 right-3 rounded rounded-3xl bg-slate-200">
+							<Button 
+							
 								type="button"
 								onClick={() => {
 									reset();
 									setOpen(false);
 								}}
 							>
-								Cancel
+								X
 							</Button>
+							</div>
 						</DialogActions>
 					</form>
+					</div>
 				</DialogContent>
 			</Dialog>
 		</>

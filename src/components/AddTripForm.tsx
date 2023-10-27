@@ -50,6 +50,7 @@ export const AddTripForm = () => {
 			<Dialog open={open} onClose={() => setOpen(false)}>
 				<DialogTitle>Update Trip</DialogTitle>
 				<DialogContent>
+				<div className="my-2">
 					<form>
 						<TextField
 							label="name"
@@ -59,6 +60,7 @@ export const AddTripForm = () => {
 							}}
 						></TextField>
 						<input
+						className="ml-4"
 							type="date"
 							value={startDate}
 							onChange={(event) =>
@@ -69,6 +71,7 @@ export const AddTripForm = () => {
 							}
 						/>
 						<DialogActions>
+						<div className="bg-200 rounded-lg p-2">
 							<Button
 								type="button"
 								onClick={() => {
@@ -77,6 +80,8 @@ export const AddTripForm = () => {
 							>
 								Submit
 							</Button>
+							</div>
+							<div className="p-0 flex justify-end items-start absolute top-3 right-3 rounded rounded-3xl bg-slate-200">
 							<Button
 								type="button"
 								onClick={() => {
@@ -84,10 +89,12 @@ export const AddTripForm = () => {
 									setOpen(false);
 								}}
 							>
-								Cancel
+								X
 							</Button>
+							</div>
 						</DialogActions>
 					</form>
+					</div>
 				</DialogContent>
 			</Dialog>
 		</>

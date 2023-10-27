@@ -127,25 +127,25 @@ export const MemberController = ({ trip }: IMemberControllerProps) => {
 				// 	<div className="rounded-lg shadow-md relative w-3/4 h-3/4 bg-[color:white] overflow-y-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-300">
 				// 		<div className="mx-auto max-w-lx"> */}
 			<Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-				<nav className="flex items-center justify-between mx-1 border-b border-gray-300 w-55rem text-500">
+				<nav className="flex items-center justify-between mx-1 border-b border-gray-300 w-96 text-500">
 					<div>Add Members</div>
 					<div>
 						<button
 							onClick={closeDialog}
-							className="px-4 py-2 mt-4 text-right text-white bg-red-500 rounded rounded-3xl bg-slate-200"
+							className="px-4 py-2 mt-2 text-right text-white bg-red-500 rounded rounded-3xl bg-slate-200"
 						>
 							X
 						</button>
 					</div>
 				</nav>
-				<nav className="flex items-center justify-between mx-1 my-1 w-55rem ">
+				<nav className="p-2  my-2 w-full ">
 					<div>
 						<input
 							type="text"
 							placeholder="Search by email or Add a new member by email"
 							value={newMemberEmail} // Use newMemberEmail as the value
 							onChange={handleInputChange} // Use handleInputChange to update both fields
-							className="w-64 px-3 py-2 border rounded-lg"
+							className=" px-3 py-2 border rounded-lg w-full"
 							ref={(el) => (inputRef.current = el)}
 						/>
 					</div>

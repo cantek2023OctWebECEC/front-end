@@ -41,9 +41,55 @@ export const MapWrapper = ({ trip }: IMapWrapperProps) => {
 				))}
 				setResultFn={(res) => setOrsResult(res)}
 			></TravelMap>
-			<div className="flex gap-4">
-				<div>per segment: {JSON.stringify(segments)}</div>
-				<div> total:{JSON.stringify(total)}</div>
+			<div className="flex gap-4 max-w-11/12">
+				<table>
+					<tbody>
+						<tr><td>
+						<table className="border-collapse min-w-full divide-y divide-gray-200 border">
+							<tbody className="bg-white divide-y divide-gray-200">
+							<tr className="col-span-3">
+								<td className="p-2 col-span-3">per segment: </td>
+							</tr>
+							{segments.map((segment, index) => (
+								<tr key={index}>
+								<td className="col-span-2">Segment {index + 1}</td>
+								<td className="p-2">Distance: {segment.distance} meters</td>
+								<td className="p-2">Duration: {segment.duration}</td>
+								</tr>
+							))}
+							</tbody>
+						</table>
+						
+						</td>
+						<td>
+						<table>
+							<tbody>
+							<tr>
+								<td>
+								<table className="border-collapse min-w-full divide-y divide-gray-200 border">
+									<tbody className="bg-white divide-y divide-gray-200">
+									<tr>
+										<td className="p-2">Total distance: </td>
+										<td className="p-2">Total duration: </td>
+									</tr>
+									<tr>
+										<td className="p-2">
+										{total && total ? JSON.stringify(total.distance).replace(/"/g, '') : 'N/A'}
+										</td>
+										<td className="p-2">
+										{total && total ? JSON.stringify(total.duration).replace(/"/g, '') : 'N/A'}
+										</td>
+									</tr>
+									</tbody>
+								</table>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	);

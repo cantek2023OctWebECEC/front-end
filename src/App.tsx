@@ -34,40 +34,34 @@ function App() {
 					<nav className="p-4 bg-300">
 						<div className="container mx-auto">
 							<div className="flex items-center justify-between">
-								
+
 								<div className="text-xl font-bold text-500 flex justify-between items-center">
-								<img src={Icon} className="w-10 h-10"></img>
+									<img src={Icon} className="w-10 h-10"></img>
 									Travel Planning App
 								</div>
 								<ul className="flex space-x-4">
-									<li>
-										<a
-											href="/"
-											className="text-500 hover:underline"
-										>
-											Schedule
-										</a>
-									</li>
-									{/* <li>
-										<a
-											href="/todo"
-											className="text-500 hover:underline "
-										>
-											Todo List
-										</a>
-									</li> */}
-									<li>
-										{loggedin ? (
-											<a
-												href="/profile"
-												className="text-500 hover:underline "
-											>
-												Profile
-											</a>
-										) : (
-											<></>
-										)}
-									</li>
+									{loggedin ? (
+										<>
+											<li>
+												<a
+													href="/"
+													className="text-500 hover:underline"
+												>
+													Schedule
+												</a>
+											</li>
+											<li>
+
+												<a
+													href="/profile"
+													className="text-500 hover:underline "
+												>
+													Profile
+												</a>
+											</li>
+										</>
+
+									) : (<></>)}
 									<li>
 										{loggedin ? (
 											<a

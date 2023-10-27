@@ -4,9 +4,9 @@ import { Login } from "../redux/actions/authAction";
 import { TripCard } from "../components/TripCard";
 import { Button } from "@mui/material";
 import { AddTripForm } from "../components/AddTripForm";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useTimeout } from 'usehooks-ts'
 
 export const HomePage = () => {
 	//used for select trip, create trip, enter trip, delete trip
@@ -16,16 +16,25 @@ export const HomePage = () => {
 	// });
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+
 	const { userinfo, token, loggedin } = useSelector(
 		(state: RootState) => state.Auth
 	);
+	const [delay,setDelay]=useState(0);
 
-
-	useEffect(() => {
+	useTimeout(()=> {
 		if (!loggedin) {
 			navigate("/login");
 		}
-	}, [loggedin, navigate]);
+	}
+	,delay);
+	
+	
+
+	useEffect(() => {
+		setDelay(2000);
+	}, []);
 
 	const refresh = () => {
 		if (token) {

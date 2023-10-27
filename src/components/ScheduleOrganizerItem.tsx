@@ -38,17 +38,17 @@ export const ScheduleOrganizerItem = ({
 					>
 						<div className="flex flex-col gap-4">
 							<div className="flex items-center justify-between">
-								<h3 className="text-lg font-bold">
+								<h3 className="text-lg font-bold max-w-[40px]">
 									{item.name}
 								</h3>
-								<button
+								<button className="bg-400 text-gray-500 rounded-lg p-2"
 									onClick={() => {
 										setAttr(item);
 									}}
 								>
 									show
 								</button>
-								<button
+								<button className="bg-400 text-gray-500 rounded-lg p-2"
 									onClick={async () => {
 										try {
 											await dissociateAttraction(

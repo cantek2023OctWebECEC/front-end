@@ -33,7 +33,7 @@ export const MapWrapper = ({ trip }: IMapWrapperProps) => {
 	}, [orsResult]);
 
 	return (
-		<div className="min-h-100vh">
+		<div className="min-h-100vh min-w-11/12">
 			<TravelMap
 				locationArray={trip.attractions.map((e) => e.location)}
 				enrichmentArray={trip.attractions.map((e) => (

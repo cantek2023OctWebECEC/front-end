@@ -19,8 +19,8 @@ export const AttractionList = ({ trip }: IAttractionListProps) => {
 		);
 	}, [data, trip]);
 	return (
-		<div className="flex flex-col items-center">
-			<input
+		<div className="flex flex-col items-center max-w-sm">
+			<input className="border border-gray-300 w-full"
 				placeholder="filter"
 				value={filter}
 				onChange={(e) => setFilter(e.target.value)}

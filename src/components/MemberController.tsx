@@ -224,7 +224,7 @@ export const MemberController = ({ trip }: IMemberControllerProps) => {
 												</div>
 												<div>
 													<button
-														className="p-2 text-red-500 rounded bg-200 "
+														className="p-2 text-gray-500 rounded bg-200 "
 														onClick={() =>
 															removeMember(
 																member.email

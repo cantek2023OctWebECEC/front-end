@@ -5,7 +5,7 @@ import { showTrip } from "../apis/tripApi";
 import { MapWrapper } from "../components/mapWrapper";
 import { AttractionList } from "../components/AttractionList";
 import { ScheduleOrganizer } from "../components/ScheduleOrganizer";
-import { AttractionDetails } from "../components/AttractionDetails";
+
 import { Button } from "@mui/material";
 import { UpdateTripForm } from "../components/UpdateTripForm";
 import { MemberController } from "../components/MemberController";
@@ -26,16 +26,16 @@ export const TripPage = () => {
 		enabled: !!id,
 	});
 	return (
-		<div className="flex gap-2 p-2 min-h-100vh">
+		<div className="w-full h-full">
+		<div className="flex gap-2 p-2 min-h-100vh w-full">
 			{data ? (
 				<>
 					<AttractionList trip={data}></AttractionList>
-					<div className="flex flex-col gap-2">
+					<div className="flex flex-col gap-2 w-10/12">
 						<MapWrapper trip={data}></MapWrapper>
 						<ScheduleOrganizer trip={data}></ScheduleOrganizer>
 					</div>
-					<div className="flex flex-col gap-2 min-w-[200px]">
-						<AttractionDetails></AttractionDetails>
+					<div className="flex flex-col gap-2 min-w-xs max-w-sm px-6">
 						<div className="flex flex-col gap-2 ">
 							<Button
 								onClick={() => {
@@ -59,6 +59,7 @@ export const TripPage = () => {
 			) : (
 				<div>loading...</div>
 			)}
+		</div>
 		</div>
 	);
 };

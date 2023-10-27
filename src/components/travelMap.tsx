@@ -114,8 +114,8 @@ export const TravelMap = (props: ITravelMapProps) => {
 	};
 	return (
 		<MapContainer
-			className={twMerge("w-96 h-96", props.className)}
-			center={[51.505, -0.09]}
+			className={twMerge("w-11/12 h-96", props.className)}
+			center={[43.651070, -79.347015]}
 			zoom={13}
 			scrollWheelZoom={false}
 			ref={map}
